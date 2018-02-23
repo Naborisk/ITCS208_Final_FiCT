@@ -26,8 +26,7 @@ public class Arena {
 	 * Constructor. 
 	 * @param _numRowPlayers is the number of player in each row.
 	 */
-	public Arena(int _numRowPlayers)
-	{	
+	public Arena(int _numRowPlayers) {
 		//INSERT YOUR CODE HERE
 		numRowPlayers = _numRowPlayers;
 
@@ -57,8 +56,7 @@ public class Arena {
 	//sample code
 	//battleField.isMemberOf(battleField.getWinningTeam()[0][0], Arena.Team.A)
 
-	public boolean isMemberOf(Player player, Team team)
-	{
+	public boolean isMemberOf(Player player, Team team) {
 		//INSERT YOUR CODE HERE
 
 		if(team == Team.A){
@@ -92,8 +90,7 @@ public class Arena {
 	//example use
 	//battleField.addPlayer(Arena.Team.A, Player.PlayerType.Samurai, Arena.Row.Front, 1);
 
-	public void addPlayer(Team team, Player.PlayerType pType, Row row, int position)
-		{
+	public void addPlayer(Team team, Player.PlayerType pType, Row row, int position) {
 			//INSERT YOUR CODE HERE
 			/*
 			 * Back row = 1
@@ -116,10 +113,6 @@ public class Arena {
 					teamB[rowPos][position-1].setPos(rowPos, position-1);
 				break;
 			}
-
-
-
-
 	}
 	
 	
@@ -133,10 +126,7 @@ public class Arena {
 	 * Returns true if all the conditions above are satisfied, false otherwise.
 	 * @return
 	 */
-	public boolean validatePlayers()
-	{
-		//INSERT YOUR CODE HERE
-
+	public boolean validatePlayers() {
 		int[] typeCountA = new int[6];
 		int[] typeCountB = new int[6];
 
@@ -195,8 +185,6 @@ public class Arena {
 				return false;
 			}
 		}
-
-
 		return true;
 	}
 
@@ -207,10 +195,6 @@ public class Arena {
 
 	public Player[][] getTeamB() {
 		return teamB;
-	}
-
-	public int getNumRounds() {
-		return numRounds;
 	}
 
 	public static int frontRemaining(Player[][] players){
@@ -231,11 +215,7 @@ public class Arena {
 	 * @return
 	 */
 
-
-
-	public static double getSumHP(Player[][] team)
-	{
-		//INSERT YOUR CODE HERE
+	public static double getSumHP(Player[][] team) {
 
 		double sumHp = 0;
 
@@ -264,9 +244,8 @@ public class Arena {
 	 * If the sums of HP of all the players of both teams are equal, return teamA.
 	 * @return
 	 */
-	public Player[][] getWinningTeam()
-	{
-		//INSERT YOUR CODE HERE
+	public Player[][] getWinningTeam() {
+
 		int aliveA = 0, aliveB = 0;
 
 		for(int i = 0;i < 4;i++){
@@ -334,31 +313,13 @@ public class Arena {
 	 * 
 	 * After the battle terminates, report the winning team, which is determined by getWinningTeam().
 	 */
-	public void startBattle()
-	{
-		//INSERT YOUR CODE HERE
-
+	public void startBattle() {
 		while(playersLeft(Team.A) != 0 || playersLeft(Team.B) != 0) {
 
 			System.out.println("@ Round " + (numRounds));
 
 			for (int i = 0; i < 4; i++) {
 				for (int j = 0; j < numRowPlayers; j++) {
-
-					/*for (int k = 0; k < 4; k++) {
-						for (int l = 0; l < numRowPlayers; l++) {
-							if (k < 2) {
-								if (!teamA[k][l].isAlive()) {
-									getWinningTeam();
-								}
-							}
-							if (k >= 2) {
-								if (!teamB[k - 2][l].isAlive()) {
-									getWinningTeam();
-								}
-							}
-						}
-					}*/
 					if (i < 2) teamA[i][j].takeAction(this);
 					if (i >= 2) teamB[i - 2][j].takeAction(this);
 
@@ -366,7 +327,6 @@ public class Arena {
 			}
 
 			displayArea(this, true);
-			//roundEnd();
 
 			logAfterEachRound();
 
@@ -386,23 +346,18 @@ public class Arena {
 	 * @param arena
 	 * @param verbose
 	 */
-	public static void displayArea(Arena arena, boolean verbose)
-	{
+	public static void displayArea(Arena arena, boolean verbose) {
 		StringBuilder str = new StringBuilder();
-		if(verbose)
-		{
+		if(verbose) {
 			str.append(String.format("%43s   %40s","Team A","")+"\t\t"+String.format("%-38s%-40s","","Team B")+"\n");
 			str.append(String.format("%43s","BACK ROW")+String.format("%43s","FRONT ROW")+"  |  "+String.format("%-43s","FRONT ROW")+"\t"+String.format("%-43s","BACK ROW")+"\n");
-			for(int i = 0; i < arena.numRowPlayers; i++)
-			{
+			for(int i = 0; i < arena.numRowPlayers; i++) {
 				str.append(String.format("%43s",arena.teamA[1][i])+String.format("%43s",arena.teamA[0][i])+"  |  "+String.format("%-43s",arena.teamB[0][i])+String.format("%-43s",arena.teamB[1][i])+"\n");
 			}
 		}
 	
 		str.append("@ Total HP of Team A = "+getSumHP(arena.teamA)+". @ Total HP of Team B = "+getSumHP(arena.teamB)+"\n\n");
 		System.out.print(str.toString());
-		
-		
 	}
 	
 	/**
@@ -418,14 +373,12 @@ public class Arena {
 	 * 
 	 * Where the numbers of the first, second, and third columns specify round numbers, sum of HP of teamA, and sum of HP of teamB respectively. 
 	 */
-	private void logAfterEachRound()
-	{
+	private void logAfterEachRound() {
 		try {
 			Files.write(logFile, Arrays.asList(new String[]{numRounds+"\t"+getSumHP(teamA)+"\t"+getSumHP(teamB)}), StandardOpenOption.APPEND, StandardOpenOption.CREATE);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 }

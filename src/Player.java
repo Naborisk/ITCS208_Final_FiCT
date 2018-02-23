@@ -31,8 +31,7 @@ public class Player {
 	 * as specified in the given table. It also reset the internal turn count of this player. 
 	 * @param _type
 	 */
-	public Player(PlayerType _type)
-	{	
+	public Player(PlayerType _type) {
 		//INSERT YOUR CODE HERE
 		type = _type;
 
@@ -87,9 +86,7 @@ public class Player {
 	 * Returns the current HP of this player
 	 * @return
 	 */
-	public double getCurrentHP()
-	{
-		//INSERT YOUR CODE HERE
+	public double getCurrentHP() {
 		return currentHP;
 	}
 	
@@ -97,9 +94,7 @@ public class Player {
 	 * Returns type of this player
 	 * @return
 	 */
-	public Player.PlayerType getType()
-	{
-		//INSERT YOUR CODE HERE
+	public Player.PlayerType getType() {
 		return type;
 	}
 
@@ -107,9 +102,7 @@ public class Player {
 	 * Returns max HP of this player. 
 	 * @return
 	 */
-	public double getMaxHP()
-	{
-		//INSERT YOUR CODE HERE
+	public double getMaxHP() {
 		return maxHP;
 	}
 	
@@ -117,10 +110,7 @@ public class Player {
 	 * Returns whether this player is sleeping.
 	 * @return
 	 */
-	public boolean isSleeping()
-	{
-		//INSERT YOUR CODE HERE
-		
+	public boolean isSleeping() {
 		return isSleeping;
 	}
 	
@@ -128,10 +118,7 @@ public class Player {
 	 * Returns whether this player is being cursed.
 	 * @return
 	 */
-	public boolean isCursed()
-	{
-		//INSERT YOUR CODE HERE
-		
+	public boolean isCursed() {
 		return isCursed;
 	}
 	
@@ -139,9 +126,7 @@ public class Player {
 	 * Returns whether this player is alive (i.e. current HP > 0).
 	 * @return
 	 */
-	public boolean isAlive()
-	{
-		//INSERT YOUR CODE HERE
+	public boolean isAlive() {
 		if(currentHP > 0) return true;
 		else return false;
 	}
@@ -150,15 +135,11 @@ public class Player {
 	 * Returns whether this player is taunting the other team.
 	 * @return
 	 */
-	public boolean isTaunting()
-	{
-		//INSERT YOUR CODE HERE
+	public boolean isTaunting() {
 		return isTaunting;
 	}
 	
-	public void attack(Player target)
-	{	
-		//INSERT YOUR CODE HERE
+	public void attack(Player target) {
 		target.currentHP -= atk;
 		if(target.currentHP < 0){
 			target.currentHP = 0;
@@ -168,10 +149,7 @@ public class Player {
 		}
 	}
 
-	public void useSpecialAbility(Player[][] myTeam, Player[][] theirTeam)
-	{	
-		//INSERT YOUR CODE HERE
-
+	public void useSpecialAbility(Player[][] myTeam, Player[][] theirTeam) {
 		Player target = getLowestCurrentHp(theirTeam, true);
 
 		switch(type){
@@ -242,6 +220,7 @@ public class Player {
 	}
 
 	private void curse(Player[][] team){
+
 		Player playerToCurse = getLowestCurrentHp(team, true);
 		playerToCurse.isCursed = true;
 	}
@@ -342,9 +321,7 @@ public class Player {
 	// code sample
 	//teamA[i][j].takeAction(this);
 
-	public void takeAction(Arena arena)
-	{	
-		//INSERT YOUR CODE HERE
+	public void takeAction(Arena arena) {
 
 		//clear statuses
 		isTaunting = false;
